@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class WeatherReportAdapter extends RecyclerView.Adapter<WeatherReportAdapter.WeatherReportViewHolder> {
+public class WeatherReportViewAdapter extends RecyclerView.Adapter<WeatherReportViewAdapter.WeatherReportViewHolder> {
     private List<WeatherReport> weatherReportList;
 
-    public WeatherReportAdapter(List<WeatherReport> weatherReportList) {
+    public WeatherReportViewAdapter(List<WeatherReport> weatherReportList) {
         this.weatherReportList = weatherReportList;
     }
 

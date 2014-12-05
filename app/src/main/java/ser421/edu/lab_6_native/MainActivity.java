@@ -32,8 +32,8 @@ public class MainActivity extends Activity {
         test.add(testReport1);
         test.add(testReport2);
 
-        WeatherReportAdapter weatherReportAdapter = new WeatherReportAdapter(test);
-        recyclerList.setAdapter(weatherReportAdapter);
+        WeatherReportViewAdapter weatherReportViewAdapter = new WeatherReportViewAdapter(test);
+        recyclerList.setAdapter(weatherReportViewAdapter);
 
     }
 
