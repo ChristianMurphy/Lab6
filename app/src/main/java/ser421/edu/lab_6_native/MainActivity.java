@@ -3,6 +3,7 @@ package ser421.edu.lab_6_native;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.RecyclerView;
@@ -23,12 +24,20 @@ public class MainActivity extends Activity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerList.setLayoutManager(linearLayoutManager);
 
+        WeatherReportRestAdapter restAdapter = new WeatherReportRestAdapter();
+        String testS = "its broken";
+        try {
+             testS = "less broken";
+             testS = restAdapter.getLocation("London,UK");
+        }
+        catch (Exception e) {}
+
         // TODO this is only test data
         List<WeatherReport> test = new ArrayList<WeatherReport>();
         WeatherReport testReport1 = new WeatherReport();
         testReport1.location = "Mesa";
         WeatherReport testReport2 = new WeatherReport();
-        testReport2.location = "Chandler";
+        testReport2.location = testS;
         test.add(testReport1);
         test.add(testReport2);
 

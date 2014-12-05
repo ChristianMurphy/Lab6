@@ -11,7 +11,7 @@ public class WeatherReportRestAdapter {
 
     String getLocation(String location) throws IOException {
         Request request = new Request.Builder()
-                .url(location)
+                .url(String.format("http://api.openweathermap.org/data/2.5/weather?q=%s", location))
                 .build();
 
         Response response = client.newCall(request).execute();
