@@ -25,21 +25,28 @@ public class MainActivity extends Activity {
         recyclerList.setLayoutManager(linearLayoutManager);
 
         WeatherReportRestAdapter restAdapter = new WeatherReportRestAdapter();
-        String testS = "its broken";
-        try {
-             testS = "less broken";
-             testS = restAdapter.getLocation("London,UK");
-        }
-        catch (Exception e) {}
+
 
         // TODO this is only test data
         List<WeatherReport> test = new ArrayList<WeatherReport>();
         WeatherReport testReport1 = new WeatherReport();
         testReport1.location = "Mesa";
+        testReport1.temperature = 50;
+        testReport1.humidity = 50;
+        testReport1.windSpeed = 50;
+        testReport1.cloudCover = 50;
         WeatherReport testReport2 = new WeatherReport();
+
+        // TODO test API
+        String testS = "its broken";
+        try {
+            testS = "less broken";
+            testS = restAdapter.getLocation("London,UK");
+        }
+        catch (Exception e) {}
         testReport2.location = testS;
         test.add(testReport1);
-        test.add(testReport2);
+        //test.add(testReport2);
 
         WeatherReportViewAdapter weatherReportViewAdapter = new WeatherReportViewAdapter(test);
         recyclerList.setAdapter(weatherReportViewAdapter);
