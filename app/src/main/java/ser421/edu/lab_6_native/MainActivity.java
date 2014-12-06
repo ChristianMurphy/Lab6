@@ -1,55 +1,58 @@
 package ser421.edu.lab_6_native;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.RecyclerView;
-
-import org.json.JSONObject;
+import android.view.View;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends Activity {
+    protected List<WeatherReport> weatherReports = new ArrayList<WeatherReport>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        update(getWindow().getDecorView().findViewById(android.R.id.content));
+    }
+
+    public void update(View view) {
         RecyclerView recyclerList = (RecyclerView) findViewById(R.id.cardList);
         recyclerList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerList.setLayoutManager(linearLayoutManager);
-
-        // TODO this is only test data
-        List<WeatherReport> test = new ArrayList<WeatherReport>();
-        WeatherReport testReport1 = new WeatherReport();
-        testReport1.location = "Mesa";
-        testReport1.temperature = 50;
-        testReport1.humidity = 50;
-        testReport1.windSpeed = 50;
-        testReport1.cloudCover = 50;
-
-        WeatherReport testReport2 = new WeatherReport();
-        try {
-            String location = "London UK";
-            testReport2 = new RequestTask().execute(location).get();
-        } catch (Exception e){
-            e.printStackTrace();
+        List<WeatherReport> weatherReports = new ArrayList<WeatherReport>();
+        EditText locationEditElement = (EditText) findViewById(R.id.locations_text);
+        String[] locations = locationEditElement.getText().toString().split(",");
+        for (String location : locations) {
+            WeatherReport weatherReport = new WeatherReport();
+            try {
+                weatherReport = new WeatherReportRestAdapter().execute(location).get();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+            weatherReports.add(weatherReport);
         }
 
-        test.add(testReport1);
-        test.add(testReport2);
-
-        WeatherReportViewAdapter weatherReportViewAdapter = new WeatherReportViewAdapter(test);
+        WeatherReportViewAdapter weatherReportViewAdapter = new WeatherReportViewAdapter(weatherReports);
         recyclerList.setAdapter(weatherReportViewAdapter);
-
     }
 
+    public void openDetails(View view) {
+        Intent intent = new Intent(this, DetailsActivity.class);
+        ArrayList test = new ArrayList(12);
+        // pass data into intent
+        intent.putExtra("test", test);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

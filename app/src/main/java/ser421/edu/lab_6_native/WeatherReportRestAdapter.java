@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-class RequestTask extends AsyncTask<String, String, WeatherReport> {
+class WeatherReportRestAdapter extends AsyncTask<String, String, WeatherReport> {
 
     @Override
     protected WeatherReport doInBackground(String... uri) {
