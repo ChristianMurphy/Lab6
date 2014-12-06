@@ -32,12 +32,12 @@ public class WeatherReport implements Parcelable {
         out.writeDouble(cloudCover);
     }
 
-    // Just cut and paste this for now
+    // magic
     public int describeContents() {
         return 0;
     }
 
-    // Just cut and paste this for now
+    // magic
     public static final Parcelable.Creator<WeatherReport> CREATOR = new Parcelable.Creator<WeatherReport>() {
         public WeatherReport createFromParcel(Parcel in) {
             return new WeatherReport(in);

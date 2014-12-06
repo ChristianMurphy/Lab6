@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 
     public void openDetails(View view) {
         Intent detailsActivity = new Intent(this, DetailsActivity.class);
-        detailsActivity.putExtra("reports", weatherReports);
+        detailsActivity.putParcelableArrayListExtra("reports", weatherReports);
         startActivity(detailsActivity);
     }
 
