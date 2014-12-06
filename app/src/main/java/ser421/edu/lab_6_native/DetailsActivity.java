@@ -24,10 +24,13 @@ public class DetailsActivity extends ActionBarActivity {
         // get data via the key
         weatherReports = extras.getParcelableArrayList("reports");
 
+        // calculate reports
         averageTemperature();
         maximumTemperature();
         averageHumidity();
         maximumHumidity();
+        bestWeather();
+        worstWeather();
     }
 
     public void averageTemperature() {
@@ -76,6 +79,32 @@ public class DetailsActivity extends ActionBarActivity {
         }
         TextView maximumHumidity =  (TextView) findViewById(R.id.maximum_humidity);
         maximumHumidity.setText("The most humid city is " + location);
+    }
+
+    public void bestWeather() {
+        double maximum = weatherReports.get(0).temperature - weatherReports.get(0).humidity;
+        String location = weatherReports.get(0).location;
+        for (int index = 1; index <  weatherReports.size(); index++) {
+            if (maximum < weatherReports.get(index).temperature - weatherReports.get(index).humidity){
+                maximum = weatherReports.get(index).temperature - weatherReports.get(index).humidity;
+                location = weatherReports.get(index).location;
+            }
+        }
+        TextView maximumTemperature =  (TextView) findViewById(R.id.best_weather);
+        maximumTemperature.setText("The best city is " + location);
+    }
+
+    public void worstWeather() {
+        double maximum = weatherReports.get(0).temperature - weatherReports.get(0).humidity;
+        String location = weatherReports.get(0).location;
+        for (int index = 1; index <  weatherReports.size(); index++) {
+            if (maximum > weatherReports.get(index).temperature - weatherReports.get(index).humidity){
+                maximum = weatherReports.get(index).temperature - weatherReports.get(index).humidity;
+                location = weatherReports.get(index).location;
+            }
+        }
+        TextView maximumTemperature =  (TextView) findViewById(R.id.worst_weather);
+        maximumTemperature.setText("The worst city is " + location);
     }
 
 
