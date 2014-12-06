@@ -36,16 +36,8 @@ public class MainActivity extends Activity {
 
         WeatherReport testReport2 = new WeatherReport();
         try {
-            String location = "London,UK";
-            String response = new RequestTask().execute("http://api.openweathermap.org/data/2.5/weather?q=" + location).get();
-
-            JSONObject jsonObject = new JSONObject(response);
-
-            testReport2.location = location;
-            testReport2.temperature = jsonObject.getJSONObject("main").getDouble("temp");
-            testReport2.humidity = jsonObject.getJSONObject("main").getDouble("humidity");
-            testReport2.windSpeed = jsonObject.getJSONObject("wind").getDouble("speed");
-            testReport2.cloudCover = jsonObject.getJSONObject("clouds").getDouble("all");
+            String location = "London UK";
+            testReport2 = new RequestTask().execute(location).get();
         } catch (Exception e){
             e.printStackTrace();
         }
