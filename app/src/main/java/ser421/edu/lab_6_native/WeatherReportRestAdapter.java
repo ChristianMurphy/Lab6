@@ -17,22 +17,31 @@ class WeatherReportRestAdapter extends AsyncTask<String, String, WeatherReport> 
 
     @Override
     protected WeatherReport doInBackground(String... uri) {
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpResponse response;
+        // stores the report to be returned
         WeatherReport weatherReport = new WeatherReport();
         try {
+            // create holders for client and response
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpResponse response;
+
+            // get the data for the location specified
             response = httpclient.execute(new HttpGet("http://api.openweathermap.org/data/2.5/weather?q=" + uri[0].replace(' ', ',')));
+
+            // check the connection is okay
             StatusLine statusLine = response.getStatusLine();
-            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+            if(statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                // excessive work to get a string
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
                 response.getEntity().writeTo(out);
                 out.close();
                 String responseString = out.toString();
 
-                JSONObject jsonObject;
+                // apparently one try is not enough
                 try {
-                    jsonObject = new JSONObject(responseString);
+                    // parse the response text into a json object
+                    JSONObject jsonObject = new JSONObject(responseString);
 
+                    // map the json values to the weather report values
                     weatherReport.location = uri[0];
                     weatherReport.temperature = jsonObject.getJSONObject("main").getDouble("temp") - 273.15;
                     weatherReport.humidity = jsonObject.getJSONObject("main").getDouble("humidity");
@@ -41,14 +50,20 @@ class WeatherReportRestAdapter extends AsyncTask<String, String, WeatherReport> 
                 } catch (Exception e) {
 
                 }
-            } else{
+            }
+            // some thing is not okay
+            else{
                 //Closes the connection.
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
             }
-        } catch (Exception e) {
+        }
+        // something really bad happened
+        catch (Exception e) {
             e.printStackTrace();
         }
+
+        // hand back the weather report
         return weatherReport;
     }
 

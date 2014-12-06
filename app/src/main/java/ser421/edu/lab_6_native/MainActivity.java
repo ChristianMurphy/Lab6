@@ -25,14 +25,21 @@ public class MainActivity extends Activity {
     }
 
     public void update(View view) {
+        // Create the weather report card generator
         RecyclerView recyclerList = (RecyclerView) findViewById(R.id.cardList);
-        recyclerList.setHasFixedSize(true);
+
+        // describe the layout of the cards
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerList.setLayoutManager(linearLayoutManager);
-        List<WeatherReport> weatherReports = new ArrayList<WeatherReport>();
+
+        // get the locations from the view
         EditText locationEditElement = (EditText) findViewById(R.id.locations_text);
+
+        // interpret to an array
         String[] locations = locationEditElement.getText().toString().split(",");
+
+        // get the weather report for each location
         for (String location : locations) {
             WeatherReport weatherReport = new WeatherReport();
             try {
@@ -43,6 +50,7 @@ public class MainActivity extends Activity {
             weatherReports.add(weatherReport);
         }
 
+        // feed the weather reports to the weather report view adapter
         WeatherReportViewAdapter weatherReportViewAdapter = new WeatherReportViewAdapter(weatherReports);
         recyclerList.setAdapter(weatherReportViewAdapter);
     }

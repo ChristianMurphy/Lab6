@@ -9,20 +9,26 @@ import android.widget.TextView;
 import java.util.List;
 
 public class WeatherReportViewAdapter extends RecyclerView.Adapter<WeatherReportViewAdapter.WeatherReportViewHolder> {
+    // stores all the weather reports
     private List<WeatherReport> weatherReportList;
 
     public WeatherReportViewAdapter(List<WeatherReport> weatherReportList) {
+        // takes the weather reports and stores internally
         this.weatherReportList = weatherReportList;
     }
 
     @Override
     public int getItemCount() {
+        // used by android to know how many times to iterate
         return weatherReportList.size();
     }
 
     @Override
     public void onBindViewHolder(WeatherReportViewHolder weatherReportViewHolder, int i) {
+        // get a weather report from the list
         WeatherReport report = weatherReportList.get(i);
+
+        // fill in the card text fields with the information
         weatherReportViewHolder.location.setText(report.location);
         weatherReportViewHolder.temperature.setText("Temperature: " + String.format("%.1f", report.temperature) + (char) 0x00B0 + "C");
         weatherReportViewHolder.humidity.setText("Humidity: " + String.format("%.1f", report.humidity) + "%");
@@ -32,6 +38,7 @@ public class WeatherReportViewAdapter extends RecyclerView.Adapter<WeatherReport
 
     @Override
     public WeatherReportViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        // adds the view during run time
         View itemView = LayoutInflater.
                 from(viewGroup.getContext()).
                 inflate(R.layout.weather_report_card, viewGroup, false);
@@ -40,7 +47,7 @@ public class WeatherReportViewAdapter extends RecyclerView.Adapter<WeatherReport
     }
 
     public static class WeatherReportViewHolder extends RecyclerView.ViewHolder {
-
+        // this stores all the parts of a Card
         protected TextView location;
         protected TextView temperature;
         protected TextView humidity;
@@ -49,6 +56,7 @@ public class WeatherReportViewAdapter extends RecyclerView.Adapter<WeatherReport
 
         public WeatherReportViewHolder(View v) {
             super(v);
+            // this grabs all the parts of a Card
             location =  (TextView) v.findViewById(R.id.location);
             temperature =  (TextView) v.findViewById(R.id.temperature);
             humidity =  (TextView) v.findViewById(R.id.humidity);
