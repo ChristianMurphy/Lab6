@@ -3,10 +3,11 @@ package ser421.edu.lab_6_native;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.RecyclerView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,6 @@ public class MainActivity extends Activity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerList.setLayoutManager(linearLayoutManager);
 
-        WeatherReportRestAdapter restAdapter = new WeatherReportRestAdapter();
-
-
         // TODO this is only test data
         List<WeatherReport> test = new ArrayList<WeatherReport>();
         WeatherReport testReport1 = new WeatherReport();
@@ -35,18 +33,25 @@ public class MainActivity extends Activity {
         testReport1.humidity = 50;
         testReport1.windSpeed = 50;
         testReport1.cloudCover = 50;
-        WeatherReport testReport2 = new WeatherReport();
 
-        // TODO test API
-        String testS = "its broken";
+        WeatherReport testReport2 = new WeatherReport();
         try {
-            testS = "less broken";
-            testS = restAdapter.getLocation("London,UK");
+            String location = "London,UK";
+            String response = new RequestTask().execute("http://api.openweathermap.org/data/2.5/weather?q=" + location).get();
+
+            JSONObject jsonObject = new JSONObject(response);
+
+            testReport2.location = location;
+            testReport2.temperature = jsonObject.getJSONObject("main").getDouble("temp");
+            testReport2.humidity = jsonObject.getJSONObject("main").getDouble("humidity");
+            testReport2.windSpeed = jsonObject.getJSONObject("wind").getDouble("speed");
+            testReport2.cloudCover = jsonObject.getJSONObject("clouds").getDouble("all");
+        } catch (Exception e){
+            e.printStackTrace();
         }
-        catch (Exception e) {}
-        testReport2.location = testS;
+
         test.add(testReport1);
-        //test.add(testReport2);
+        test.add(testReport2);
 
         WeatherReportViewAdapter weatherReportViewAdapter = new WeatherReportViewAdapter(test);
         recyclerList.setAdapter(weatherReportViewAdapter);
