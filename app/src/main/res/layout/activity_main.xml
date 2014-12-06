@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,20 +13,27 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_alignRight="@+id/fab"
+        android:layout_alignEnd="@+id/fab">
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/locations_text"
             android:text="@string/default_locations"
-            android:inputType="text" />
+            android:inputType="text"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_activity_details"
+            android:id="@+id/overall_results_button"
+            android:onClick="openDetails"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/cardList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
@@ -43,7 +51,6 @@
         android:id="@+id/fab"
         android:elevation="1dp"
         android:onClick="update"
-        android:contentDescription="@string/floating_action_button"/>
-
+        android:contentDescription="@string/floating_action_button" />
 
 </RelativeLayout>

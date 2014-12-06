@@ -58,8 +58,9 @@ public class MainActivity extends Activity {
     }
 
     public void openDetails(View view) {
-        Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra("test", weatherReports);
+        Intent detailsActivity = new Intent(this, DetailsActivity.class);
+        detailsActivity.putExtra("reports", weatherReports);
+        startActivity(detailsActivity);
     }
 
     @Override

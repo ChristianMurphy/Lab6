@@ -5,13 +5,23 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 
 public class DetailsActivity extends ActionBarActivity {
+    ArrayList<WeatherReport> weatherReports = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            return;
+        }
+        // get data via the key
+        ArrayList<WeatherReport> weatherReports = extras.getParcelableArrayList("reports");
     }
 
 
