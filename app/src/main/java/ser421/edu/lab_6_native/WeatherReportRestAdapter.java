@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -35,9 +34,9 @@ class WeatherReportRestAdapter extends AsyncTask<String, String, WeatherReport> 
                     jsonObject = new JSONObject(responseString);
 
                     weatherReport.location = uri[0];
-                    weatherReport.temperature = jsonObject.getJSONObject("main").getDouble("temp");
+                    weatherReport.temperature = jsonObject.getJSONObject("main").getDouble("temp") - 273.15;
                     weatherReport.humidity = jsonObject.getJSONObject("main").getDouble("humidity");
-                    weatherReport.windSpeed = jsonObject.getJSONObject("wind").getDouble("speed");
+                    weatherReport.windSpeed = jsonObject.getJSONObject("wind").getDouble("speed") * 2.2369362920544;
                     weatherReport.cloudCover = jsonObject.getJSONObject("clouds").getDouble("all");
                 } catch (Exception e) {
 
@@ -47,10 +46,8 @@ class WeatherReportRestAdapter extends AsyncTask<String, String, WeatherReport> 
                 response.getEntity().getContent().close();
                 throw new IOException(statusLine.getReasonPhrase());
             }
-        } catch (ClientProtocolException e) {
-            //TODO Handle problems..
-        } catch (IOException e) {
-            //TODO Handle problems..
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return weatherReport;
     }
@@ -58,6 +55,5 @@ class WeatherReportRestAdapter extends AsyncTask<String, String, WeatherReport> 
     @Override
     protected void onPostExecute(WeatherReport result) {
         super.onPostExecute(result);
-        //Do anything with response..
     }
 }

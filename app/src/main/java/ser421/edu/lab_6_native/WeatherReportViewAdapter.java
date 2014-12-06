@@ -24,10 +24,10 @@ public class WeatherReportViewAdapter extends RecyclerView.Adapter<WeatherReport
     public void onBindViewHolder(WeatherReportViewHolder weatherReportViewHolder, int i) {
         WeatherReport report = weatherReportList.get(i);
         weatherReportViewHolder.location.setText(report.location);
-        weatherReportViewHolder.temperature.setText("Temperature: " + Double.toString(report.temperature));
-        weatherReportViewHolder.humidity.setText("Humidity: " + Double.toString(report.humidity));
-        weatherReportViewHolder.windSpeed.setText("Wind Speed: " + Double.toString(report.windSpeed));
-        weatherReportViewHolder.cloudCover.setText("Cloud Cover: " + Double.toString(report.cloudCover));
+        weatherReportViewHolder.temperature.setText("Temperature: " + String.format("%.1f", report.temperature) + (char) 0x00B0 + "C");
+        weatherReportViewHolder.humidity.setText("Humidity: " + String.format("%.1f", report.humidity) + "%");
+        weatherReportViewHolder.windSpeed.setText("Wind Speed: " + String.format("%.1f", report.windSpeed) + "MPH");
+        weatherReportViewHolder.cloudCover.setText("Cloud Cover: " + String.format("%.1f", report.cloudCover) + "%");
     }
 
     @Override
