@@ -11,11 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends Activity {
-    protected List<WeatherReport> weatherReports = new ArrayList<WeatherReport>();
+    protected ArrayList<WeatherReport> weatherReports = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +38,9 @@ public class MainActivity extends Activity {
         // interpret to an array
         String[] locations = locationEditElement.getText().toString().split(",");
 
+        // clear out current reports
+        weatherReports = new ArrayList<>();
+
         // get the weather report for each location
         for (String location : locations) {
             WeatherReport weatherReport = new WeatherReport();
@@ -57,9 +59,7 @@ public class MainActivity extends Activity {
 
     public void openDetails(View view) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        ArrayList test = new ArrayList(12);
-        // pass data into intent
-        intent.putExtra("test", test);
+        intent.putExtra("test", weatherReports);
     }
 
     @Override

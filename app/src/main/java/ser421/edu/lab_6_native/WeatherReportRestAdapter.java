@@ -47,8 +47,10 @@ class WeatherReportRestAdapter extends AsyncTask<String, String, WeatherReport> 
                     weatherReport.humidity = jsonObject.getJSONObject("main").getDouble("humidity");
                     weatherReport.windSpeed = jsonObject.getJSONObject("wind").getDouble("speed") * 2.2369362920544;
                     weatherReport.cloudCover = jsonObject.getJSONObject("clouds").getDouble("all");
-                } catch (Exception e) {
-
+                }
+                // format is different than expected
+                catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
             // some thing is not okay

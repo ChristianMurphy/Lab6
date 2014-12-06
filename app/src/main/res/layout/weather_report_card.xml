@@ -18,14 +18,14 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center_vertical"
-            android:textSize="28dp"/>
+            android:textSize="28sp"/>
 
         <TextView
             android:id="@+id/temperature"
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:gravity="center_vertical"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:layout_below="@id/location"/>
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:gravity="center_vertical"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:layout_below="@id/temperature"/>
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:gravity="center_vertical"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:layout_below="@id/humidity"/>
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:gravity="center_vertical"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:layout_below="@id/wind_speed"/>
 
     </RelativeLayout>

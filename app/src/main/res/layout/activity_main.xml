@@ -19,10 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/locations_text"
-            android:text="London UK, Mesa AZ, Paris Fr"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:text="@string/default_locations"
+            android:inputType="text" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/cardList"
@@ -37,12 +35,15 @@
         android:src="@drawable/ic_action_refresh"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:tint="@android:color/white"
         android:id="@+id/fab"
         android:elevation="1dp"
-        android:onClick="update" />
+        android:onClick="update"
+        android:contentDescription="@string/floating_action_button"/>
 
 
 </RelativeLayout>
