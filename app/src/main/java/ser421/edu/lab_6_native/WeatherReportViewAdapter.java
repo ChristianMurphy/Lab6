@@ -1,5 +1,6 @@
 package ser421.edu.lab_6_native;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class WeatherReportViewAdapter extends RecyclerView.Adapter<WeatherReport
 
         // fill in the card text fields with the information
         weatherReportViewHolder.location.setText(report.location);
+        weatherReportViewHolder.card.setTag(String.format("%.1f", report.latitude) + "," + String.format("%.1f", report.longitude));
         weatherReportViewHolder.temperature.setText("Temperature: " + String.format("%.1f", report.temperature) + (char) 0x00B0 + "C");
         weatherReportViewHolder.humidity.setText("Humidity: " + String.format("%.1f", report.humidity) + "%");
         weatherReportViewHolder.windSpeed.setText("Wind Speed: " + String.format("%.1f", report.windSpeed) + "MPH");
@@ -48,6 +50,7 @@ public class WeatherReportViewAdapter extends RecyclerView.Adapter<WeatherReport
 
     public static class WeatherReportViewHolder extends RecyclerView.ViewHolder {
         // this stores all the parts of a Card
+        protected CardView card;
         protected TextView location;
         protected TextView temperature;
         protected TextView humidity;
@@ -57,6 +60,7 @@ public class WeatherReportViewAdapter extends RecyclerView.Adapter<WeatherReport
         public WeatherReportViewHolder(View v) {
             super(v);
             // this grabs all the parts of a Card
+            card = (CardView) v.findViewById(R.id.card_view);
             location =  (TextView) v.findViewById(R.id.location);
             temperature =  (TextView) v.findViewById(R.id.temperature);
             humidity =  (TextView) v.findViewById(R.id.humidity);

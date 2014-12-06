@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 public class WeatherReport implements Parcelable {
     protected String location;
+    protected double latitude;
+    protected double longitude;
     protected double temperature;
     protected double humidity;
     protected double windSpeed;
@@ -17,6 +19,8 @@ public class WeatherReport implements Parcelable {
     private WeatherReport(Parcel in) {
         // This order must match the order in writeToParcel()
         location = in.readString();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
         temperature = in.readDouble();
         humidity = in.readDouble();
         windSpeed = in.readDouble();
@@ -26,6 +30,8 @@ public class WeatherReport implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         // Again this order must match the Question(Parcel) constructor
         out.writeString(location);
+        out.writeDouble(latitude);
+        out.writeDouble(longitude);
         out.writeDouble(temperature);
         out.writeDouble(humidity);
         out.writeDouble(windSpeed);

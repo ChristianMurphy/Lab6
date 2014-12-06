@@ -2,6 +2,7 @@ package ser421.edu.lab_6_native;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
@@ -61,6 +62,16 @@ public class MainActivity extends Activity {
         Intent detailsActivity = new Intent(this, DetailsActivity.class);
         detailsActivity.putParcelableArrayListExtra("reports", weatherReports);
         startActivity(detailsActivity);
+    }
+
+    public void openMap(View view) {
+        String geolocation = "geo:" + view.getTag();
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(geolocation));
+
+        Intent chooser = Intent.createChooser(intent,"Launch Maps");
+
+        startActivity(chooser);
     }
 
     @Override

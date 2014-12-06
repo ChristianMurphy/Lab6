@@ -43,6 +43,8 @@ class WeatherReportRestAdapter extends AsyncTask<String, String, WeatherReport> 
 
                     // map the json values to the weather report values
                     weatherReport.location = uri[0];
+                    weatherReport.latitude = jsonObject.getJSONObject("coord").getDouble("lat");
+                    weatherReport.longitude = jsonObject.getJSONObject("coord").getDouble("lon");
                     weatherReport.temperature = jsonObject.getJSONObject("main").getDouble("temp") - 273.15;
                     weatherReport.humidity = jsonObject.getJSONObject("main").getDouble("humidity");
                     weatherReport.windSpeed = jsonObject.getJSONObject("wind").getDouble("speed") * 2.2369362920544;
